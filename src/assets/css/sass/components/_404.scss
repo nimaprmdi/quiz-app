@@ -1,0 +1,12 @@
+.c-404__pre {
+  counter-reset: line-counter;
+}
+
+.c-404__desc {
+  counter-increment: my-awesome-counter;
+
+  &::before {
+    content: counter(my-awesome-counter);
+    margin-right: 12px;
+  }
+}
