@@ -1,0 +1,9 @@
+.c-test__item {
+  transition: 0.5 all !important;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    @apply bg-slate-800;
+  }
+}
