@@ -12,6 +12,7 @@ interface ActionType {
   payload: {
     id: string;
     question: string;
+    time: number;
   };
 }
 

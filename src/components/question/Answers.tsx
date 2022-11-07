@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
 import AnswerItem from "./AnswerItem";
 import { QuestionContext } from "../../context/QuestionContext";
 import NextQuestion from "../common/NextQuestion";
@@ -17,11 +16,12 @@ interface AnswersProps {
 
 const Answers = ({ answerData, questionSlug }: AnswersProps) => {
   const { dispatch } = useContext(QuestionContext);
-  const [isSelected, setIsSelected] = useState(false);
+  const [isSelected, setIsSelected] = useState({ id: "", called: false });
 
-  const handleDispatch = (id: string) => {
-    setIsSelected(true);
-    dispatch({ type: "ADD_ANSWER", payload: { id, question: questionSlug } });
+  const handleDispatch = (id: string, time: number) => {
+    if (!isSelected.called) setIsSelected({ id: id, called: true });
+
+    dispatch({ type: "ADD_ANSWER", payload: { id, question: questionSlug, time } });
   };
 
   return (
@@ -37,14 +37,15 @@ const Answers = ({ answerData, questionSlug }: AnswersProps) => {
                   id={answer.id}
                   index={++index}
                   title={answer.answerTitle}
-                  onHandleDispatch={(id) => handleDispatch(id)}
+                  onHandleDispatch={(id, time) => handleDispatch(id, time)}
+                  selectedId={isSelected.id}
                 />
               </li>
             ))}
           </ul>
         </div>
 
-        {isSelected && <NextQuestion />}
+        {isSelected.id && <NextQuestion />}
       </div>
     </div>
   );

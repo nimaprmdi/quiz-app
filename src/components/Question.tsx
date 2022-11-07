@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import PopUp from "./common/PopUp";
 import QuestionHeader from "./question/QuestionHeader";
 import QuestionBody from "./question/QuestionBody";
@@ -11,11 +11,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import NextQuestion from "./common/NextQuestion";
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-
 interface QuestionsSingle {
   id: string;
   questionSlug: string;
@@ -26,6 +21,7 @@ interface QuestionsSingle {
 const Question = () => {
   const { slug } = useParams();
   const { data, loading, error } = useQuery(GET_QUESTIONS, {
+    fetchPolicy: "network-only",
     variables: {
       slug,
     },
@@ -48,7 +44,7 @@ const Question = () => {
                 <QuestionBody
                   questionTitle={question.questionTitle}
                   answers={question.answers}
-                  slug={slug}
+                  questionSlug={question.questionSlug}
                 />
               </SwiperSlide>
             ))}
