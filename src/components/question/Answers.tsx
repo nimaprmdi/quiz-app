@@ -1,7 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import AnswerItem from "./AnswerItem";
-import { QuestionContext } from "../../context/QuestionContext";
 import NextQuestion from "../common/NextQuestion";
+import { useSwiper } from "swiper/react";
+import { useNavigate } from "react-router-dom";
+import { QuestionContext } from "../../context/QuestionContext";
 
 interface AnswerItems {
   answerIsTrue: boolean;
@@ -15,6 +17,9 @@ interface AnswersProps {
 }
 
 const Answers = ({ answerData, questionSlug }: AnswersProps) => {
+  const swiper = useSwiper();
+  const navigate = useNavigate();
+
   const { dispatch } = useContext(QuestionContext);
   const [isSelected, setIsSelected] = useState({ id: "", called: false });
 
@@ -23,6 +28,16 @@ const Answers = ({ answerData, questionSlug }: AnswersProps) => {
 
     dispatch({ type: "ADD_ANSWER", payload: { id, question: questionSlug, time } });
   };
+
+  const handleNextBtn = () => {
+    if (swiper.activeIndex + 1 === swiper.slides.length) {
+      return navigate("/score");
+    } else {
+      return swiper.slideNext();
+    }
+  };
+
+  const btnText = swiper.activeIndex + 1 === swiper.slides.length ? "See Result" : "Next";
 
   return (
     <div className="c-test mt-10 px-4 xl:mt-8 w-full h-4/5 flex justify-center items-center">
@@ -45,7 +60,7 @@ const Answers = ({ answerData, questionSlug }: AnswersProps) => {
           </ul>
         </div>
 
-        {isSelected.id && <NextQuestion />}
+        {isSelected.id && <NextQuestion title={btnText} onNextClick={() => handleNextBtn()} />}
       </div>
     </div>
   );
