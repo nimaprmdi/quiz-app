@@ -1,6 +1,7 @@
 interface StateTypeItems {
   id: string;
   question: string;
+  time: number;
 }
 
 interface StateType {

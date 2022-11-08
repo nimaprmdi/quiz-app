@@ -1,6 +1,6 @@
-import { useEffect, useContext, useState } from "react";
 import Answers from "./Answers";
 import QuestionTitle from "./QuestionTitle";
+import { useEffect, useContext, useState } from "react";
 import { useSwiper } from "swiper/react";
 import { SwiperContext } from "../../context/SwiperContext";
 
@@ -8,9 +8,11 @@ interface QuestionBodyProps {
   questionSlug: string | undefined;
   questionTitle: string;
   answers: [];
+  displayPopup: boolean;
+  name: string;
 }
 
-const QuestionBody = ({ questionTitle, answers, questionSlug }: QuestionBodyProps) => {
+const QuestionBody = ({ questionTitle, answers, questionSlug, displayPopup, name }: QuestionBodyProps) => {
   const swiper = useSwiper();
   const { state, dispatch } = useContext(SwiperContext);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -35,7 +37,7 @@ const QuestionBody = ({ questionTitle, answers, questionSlug }: QuestionBodyProp
   return (
     <>
       <QuestionTitle title={questionTitle} />
-      <Answers answerData={answers} questionSlug={questionSlug} />
+      <Answers answerData={answers} questionSlug={questionSlug} displayPopup={displayPopup} name={name} />
     </>
   );
 };

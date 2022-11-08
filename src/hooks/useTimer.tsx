@@ -41,6 +41,8 @@ const useTimer = () => {
     handleStart,
     handlePause,
     handleReset,
+    isActive,
+    isPaused,
   };
 };
 

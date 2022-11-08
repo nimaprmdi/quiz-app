@@ -1,19 +1,16 @@
-import { useState, useEffect, useMemo, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { Icon } from "@iconify/react";
-import useTimer from "../../hooks/useTimer";
 import { SwiperContext } from "../../context/SwiperContext";
+import { TimeContext } from "../../context/TimeContext";
 
 const QuestionHeader = () => {
-  const { time, handleStart, handlePause } = useTimer();
+  const { state: timeState } = useContext(TimeContext);
   const { state } = useContext(SwiperContext);
 
   useEffect(() => {
-    console.log("number", state);
-  }, [state]);
-
-  useEffect(() => {
-    handleStart();
-  }, []);
+    // console.log(timeState);
+    // handleStart();
+  }, [timeState]);
 
   return (
     <div className="w-full px-4 xl:px-0 flex justify-between flex-wrap gap-y-2 relative z-40">
@@ -28,16 +25,11 @@ const QuestionHeader = () => {
       <div className="w-max flex justify-end items-center gap-4">
         <div className="rounded-full text-center px-6 py-[10px] text-white bg-primaryDark flex items-center gap-3 opacity-80">
           <div className="flex">
-            <span className="digits">{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
-            <span className="digits">{("0" + Math.floor((time / 1000) % 60)).slice(-2)}.</span>
-            <span className="digits mili-sec">{("0" + ((time / 10) % 100)).slice(-2)}</span>
+            <span className="digits">{("0" + Math.floor((timeState.globalTime / 60000) % 60)).slice(-2)}:</span>
+            <span className="digits">{("0" + Math.floor((timeState.globalTime / 1000) % 60)).slice(-2)}.</span>
+            <span className="digits mili-sec">{("0" + ((timeState.globalTime / 10) % 100)).slice(-2)}</span>
           </div>
 
-          <Icon icon="carbon:time" width={20} />
-        </div>
-
-        <div className="rounded-full text-center px-6 py-[10px] text-white bg-primaryDark flex items-center gap-3 opacity-80">
-          1 / 20
           <Icon icon="fluent-mdl2:world-clock" width={20} />
         </div>
       </div>

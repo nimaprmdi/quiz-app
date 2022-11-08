@@ -1,15 +1,12 @@
-import { useState, useEffect } from "react";
-import PopUp from "./common/PopUp";
 import QuestionHeader from "./question/QuestionHeader";
 import QuestionBody from "./question/QuestionBody";
+import PopUp from "./common/PopUp";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_QUESTIONS } from "../graphql/query";
-
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import "swiper/swiper-bundle.css";
-import NextQuestion from "./common/NextQuestion";
 
 interface QuestionsSingle {
   id: string;
@@ -26,13 +23,26 @@ const Question = () => {
       slug,
     },
   });
+  const [displayPopup, setDisplayPopup] = useState(true);
+  const [name, setname] = useState("");
+
+  const handlePopup = (name: string) => {
+    setDisplayPopup(false);
+    setname(name);
+  };
 
   if (error) return <p>{error.message}</p>;
   if (loading) return <p>Loading</p>;
 
   return (
     <section className="c-question w-full h-primary bg-primary flex justify-center items-start">
-      {/* <PopUp /> */}
+      {displayPopup && (
+        <PopUp
+          title="Welcome To This Test"
+          description="Your test will start when ypu click on the Next button and your time will get calculated!"
+          handlePopClick={(e) => handlePopup(e)}
+        />
+      )}
 
       <div className="w-full max-w-[1184px] mt-9 flex justify-center flex-wrap">
         <QuestionHeader />
@@ -45,6 +55,8 @@ const Question = () => {
                   questionTitle={question.questionTitle}
                   answers={question.answers}
                   questionSlug={question.questionSlug}
+                  displayPopup={displayPopup}
+                  name={name}
                 />
               </SwiperSlide>
             ))}

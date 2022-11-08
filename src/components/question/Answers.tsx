@@ -1,9 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import AnswerItem from "./AnswerItem";
 import NextQuestion from "../common/NextQuestion";
+import useTimer from "../../hooks/useTimer";
 import { useSwiper } from "swiper/react";
 import { useNavigate } from "react-router-dom";
 import { QuestionContext } from "../../context/QuestionContext";
+import { TimeContext } from "../../context/TimeContext";
+import { useMutation } from "@apollo/client";
+import { SEND_TIME, SEND_T } from "../../graphql/mutation";
+import { useParams } from "react-router-dom";
 
 interface AnswerItems {
   answerIsTrue: boolean;
@@ -14,28 +19,59 @@ interface AnswerItems {
 interface AnswersProps {
   answerData: AnswerItems[];
   questionSlug: string | undefined;
+  displayPopup: boolean;
+  name: string;
 }
 
-const Answers = ({ answerData, questionSlug }: AnswersProps) => {
+const Answers = ({ answerData, questionSlug, displayPopup, name }: AnswersProps) => {
+  const { slug } = useParams();
   const swiper = useSwiper();
   const navigate = useNavigate();
-
   const { dispatch } = useContext(QuestionContext);
   const [isSelected, setIsSelected] = useState({ id: "", called: false });
+  const { dispatch: timeDispatch } = useContext(TimeContext);
+  const { time, handleStart, handlePause, isActive, isPaused } = useTimer();
 
-  const handleDispatch = (id: string, time: number) => {
+  const [sendTime, { data, error, loading }] = useMutation(SEND_T, {
+    variables: {
+      timeName: name,
+      timeDuration: time,
+      timeDate: new Date().toISOString(),
+    },
+  });
+
+  const handleDispatch = (id: string) => {
+    handlePause();
+
     if (!isSelected.called) setIsSelected({ id: id, called: true });
-
     dispatch({ type: "ADD_ANSWER", payload: { id, question: questionSlug, time } });
   };
 
   const handleNextBtn = () => {
     if (swiper.activeIndex + 1 === swiper.slides.length) {
-      return navigate("/score");
+      sendTime();
+
+      if (Object.keys(data)) {
+        return navigate("/score");
+      }
     } else {
       return swiper.slideNext();
     }
   };
+
+  useEffect(() => {
+    if (!displayPopup) {
+      handleStart();
+    }
+  }, [displayPopup]);
+
+  useEffect(() => {
+    timeDispatch({ type: "NEW_GLOBAL_TIME", payload: { globalTime: time } });
+  }, [swiper.activeIndex, time]);
+
+  useEffect(() => {
+    console.log({ data, error, loading });
+  }, [data, error, loading]);
 
   const btnText = swiper.activeIndex + 1 === swiper.slides.length ? "See Result" : "Next";
 
@@ -52,7 +88,7 @@ const Answers = ({ answerData, questionSlug }: AnswersProps) => {
                   id={answer.id}
                   index={++index}
                   title={answer.answerTitle}
-                  onHandleDispatch={(id, time) => handleDispatch(id, time)}
+                  onHandleDispatch={(id) => handleDispatch(id)}
                   selectedId={isSelected.id}
                 />
               </li>
