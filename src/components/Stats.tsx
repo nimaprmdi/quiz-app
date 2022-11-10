@@ -10,22 +10,9 @@ import {
   Legend,
   Tooltip,
 } from "chart.js";
-import {
-  Chart,
-  getDatasetAtEvent,
-  getElementAtEvent,
-  getElementsAtEvent,
-} from "react-chartjs-2";
+import { Chart, getDatasetAtEvent, getElementAtEvent, getElementsAtEvent } from "react-chartjs-2";
 
-ChartJS.register(
-  LinearScale,
-  CategoryScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Legend,
-  Tooltip
-);
+ChartJS.register(LinearScale, CategoryScale, BarElement, PointElement, LineElement, Legend, Tooltip);
 
 const Stats = () => {
   const labels = ["January", "February", "March", "April", "May", "June", "July"];
@@ -46,7 +33,7 @@ const Stats = () => {
 
   return (
     <div className="c-score //GLOB w-full h-primary //BG bg-primary //DISP flex justify-center items-center content-center">
-      <div className="//GLOB overflow-auto px-8 pb-16 md:pb-0 lg:px-0 w-full lg:w-10/12 h-primary md:h-4/5 relative z-20 bg-glassLight lg:rounded-3xl max-w-[1184px] backdrop-blur-md flex justify-center items-center flex-wrap content-center">
+      <div className="//GLOB overflow-auto px-8 pb-16 md:pb-0 lg:px-0 w-full lg:w-10/12 h-primary md:h-4/5 relative z-20 bg-glassLight lg:rounded-3xl max-w-[1184px] backdrop-blur-md flex justify-center items-center flex-wrap content-center animate-fade-in duration-300">
         <div className="w-full h-full lg:w-4/5 lg:h-4/5 //DISP flex items-center content-center">
           <Chart type="bar" data={data} />
         </div>

@@ -32,6 +32,12 @@ module.exports = {
         glassDark:
           "linear-gradient(334.14deg, rgb(0 0 0 / 31%) -14.65%, rgb(90 43 43 / 0%) 103.2%), linear-gradient(149.49deg, rgb(63 54 38 / 40%) -4.75%, rgb(192 162 109 / 0%) 119.61%)",
       },
+      minHeight: {
+        primary: "calc(100vh - 80px)",
+      },
+      animation: {
+        "fade-in": "fadeIn 0.2s linear forwards ",
+      },
     },
   },
   plugins: [],

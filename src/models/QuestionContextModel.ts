@@ -1,4 +1,5 @@
 interface StateTypeItems {
+  isTrue: boolean;
   id: string;
   question: string;
   time: number;
@@ -6,6 +7,8 @@ interface StateTypeItems {
 
 interface StateType {
   selectedAnswer: StateTypeItems[];
+  name: string;
+  globalTime: number;
 }
 
 interface ActionType {
@@ -14,6 +17,9 @@ interface ActionType {
     id: string;
     question: string;
     time: number;
+    name: string;
+    globalTime: number;
+    isTrue: boolean;
   };
 }
 

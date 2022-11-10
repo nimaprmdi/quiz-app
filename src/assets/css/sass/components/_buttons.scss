@@ -19,3 +19,13 @@
     color: #000;
   }
 }
+
+.c-btn--ghost {
+  background-color: transparent;
+  @apply border border-gray-700 text-black;
+
+  &:hover,
+  &:focus {
+    border: 1px solid transparent;
+  }
+}

@@ -1,10 +1,12 @@
-import React, { useReducer, createContext, FC } from "react";
+import React, { useReducer, createContext } from "react";
 import { StateType, ActionType, QustionContextProps } from "../models/QuestionContextModel";
 
-/** This Context Will Find Out Which Answer Is selcted  */
+/* This Context Will Find Out Which Answer Is Selcted  */
 
 const initialState: StateType = {
   selectedAnswer: [],
+  name: "",
+  globalTime: 0,
 };
 
 const questionReducer = (state: StateType, action: ActionType) => {
@@ -17,10 +19,24 @@ const questionReducer = (state: StateType, action: ActionType) => {
         };
       }
       return state;
-    case "START_TIMER":
+
+    case "ADD_NAME":
       return {
         ...state,
-        selectedAnswer: [...state.selectedAnswer, action.payload],
+        name: action.payload.name,
+      };
+
+    case "ADD_TIME":
+      return {
+        ...state,
+        globalTime: action.payload.globalTime,
+      };
+
+    case "RESET_TEST":
+      return {
+        selectedAnswer: [],
+        name: "",
+        globalTime: 0,
       };
     default:
       return state;

@@ -17,11 +17,29 @@ const SEND_TIME = gql`
 `;
 
 const SEND_T = gql`
-  mutation steTime($timeName: String!, $timeDuration: Float!, $timeDate: Date) {
-    createTime(data: { timeName: $timeName, timeDuration: $timeDuration, timeDate: $timeDate }) {
+  mutation setTime(
+    $timeName: String!
+    $timeDuration: Float!
+    $timeDate: Date
+    $timeTotalQuestions: Float!
+    $timeCorrectAnswers: Float!
+    $categorySlug: String
+  ) {
+    createTime(
+      data: {
+        timeName: $timeName
+        timeDuration: $timeDuration
+        timeDate: $timeDate
+        timeTotalQuestions: $timeTotalQuestions
+        timeCorrectAnswers: $timeCorrectAnswers
+        category: { connect: { Category: { categorySlug: $categorySlug } } }
+      }
+    ) {
       timeDuration
       timeName
       timeDate
+      timeTotalQuestions
+      timeCorrectAnswers
     }
   }
 `;

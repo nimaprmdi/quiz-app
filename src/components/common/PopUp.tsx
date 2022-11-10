@@ -12,8 +12,8 @@ const PopUp = ({ title, description, handlePopClick }: PopUpProps) => {
 
   return (
     <div className="c-popup selection://POS absolute top-0 left-0 z-50 w-full h-screen //BG backdrop-blur-[4px] //DISP flex justify-center items-center">
-      <div className="w-[488px] px-4 py-8 bg-glassDark backdrop-blur-xl rounded-lg text-left text-white">
-        <div className="w-max bg-glassLight p-4 rounded-full">
+      <div className="w-[488px] px-4 py-8 bg-glassDark backdrop-blur-xl rounded-lg text-left text-white animate-fade-in duration-300">
+        <div className="w-max bg-glassLight p-4 rounded-full animate-fade-in duration-300">
           <Icon icon="ph:pencil-simple-line-light" width={40} />
         </div>
 
@@ -27,6 +27,7 @@ const PopUp = ({ title, description, handlePopClick }: PopUpProps) => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder="Your Name Here"
+          required
         />
 
         <button onClick={() => handlePopClick(value)} className="c-btn c-btn--secondary mt-4 float-right">

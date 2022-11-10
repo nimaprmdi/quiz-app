@@ -1,11 +1,14 @@
+import LoadingComponent from "./common/LoadingComponent";
 import QuestionHeader from "./question/QuestionHeader";
 import QuestionBody from "./question/QuestionBody";
 import PopUp from "./common/PopUp";
-import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { useState, useContext } from "react";
+import { QuestionContext } from "../context/QuestionContext";
+import { GET_QUESTIONS } from "../graphql/query";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { GET_QUESTIONS } from "../graphql/query";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { toast } from "react-toastify";
 import "swiper/swiper-bundle.css";
 
 interface QuestionsSingle {
@@ -25,17 +28,27 @@ const Question = () => {
   });
   const [displayPopup, setDisplayPopup] = useState(true);
   const [name, setname] = useState("");
+  const { dispatch } = useContext(QuestionContext);
 
   const handlePopup = (name: string) => {
-    setDisplayPopup(false);
-    setname(name);
+    dispatch({ type: "RESET_TEST" });
+
+    if (name) {
+      setDisplayPopup(false);
+      setname(name);
+      dispatch({ type: "ADD_NAME", payload: { name } });
+    } else {
+      toast.error("Enter Your Name", {
+        position: "top-center",
+      });
+    }
   };
 
-  if (error) return <p>{error.message}</p>;
-  if (loading) return <p>Loading</p>;
+  if (loading) return <LoadingComponent />;
+  if (error) return <LoadingComponent hasError={error.message} />;
 
   return (
-    <section className="c-question w-full h-primary bg-primary flex justify-center items-start">
+    <section className="c-question w-full min-h-screen bg-primary flex justify-center items-start">
       {displayPopup && (
         <PopUp
           title="Welcome To This Test"
