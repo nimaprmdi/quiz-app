@@ -1,10 +1,10 @@
+import CategoryIcon from "./common/CategoryIcon";
 import { useContext, useState, useEffect } from "react";
 import { QuestionContext } from "../context/QuestionContext";
 import { useMutation } from "@apollo/client";
 import { SEND_T } from "../graphql/mutation";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import CategoryIcon from "./common/CategoryIcon";
 
 const Score = () => {
   const {

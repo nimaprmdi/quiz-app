@@ -2,6 +2,7 @@ import LoadingComponent from "./common/LoadingComponent";
 import QuestionHeader from "./question/QuestionHeader";
 import QuestionBody from "./question/QuestionBody";
 import PopUp from "./common/PopUp";
+import CategoryIcon from "./common/CategoryIcon";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useState, useContext } from "react";
 import { QuestionContext } from "../context/QuestionContext";
@@ -10,7 +11,6 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { toast } from "react-toastify";
 import "swiper/swiper-bundle.css";
-import CategoryIcon from "./common/CategoryIcon";
 
 interface QuestionsSingle {
   id: string;

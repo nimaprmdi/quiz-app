@@ -71,8 +71,6 @@ const Stats = () => {
           },
         ],
       });
-
-      console.log(chartData);
     }
   }, [data, loading, error]);
 
@@ -80,7 +78,7 @@ const Stats = () => {
   if (error) return <LoadingComponent hasError={error.message} />;
 
   return (
-    <div className="c-score //GLOB w-full h-primary //BG bg-primary //DISP flex justify-center items-center content-center">
+    <div className="c-score //GLOB w-full min-h-screen //BG bg-primary //DISP flex justify-center items-center content-center">
       {displayPopup && (
         <PopUp
           title="Please enter name"
@@ -89,7 +87,7 @@ const Stats = () => {
         />
       )}
 
-      <div className="//GLOB overflow-auto px-8 pb-16 md:pb-0 lg:px-0 w-full lg:w-10/12 h-primary md:h-4/5 relative z-20 bg-glassLight lg:rounded-3xl max-w-[1184px] backdrop-blur-md flex justify-center items-center flex-wrap content-center animate-fade-in duration-300">
+      <div className="//GLOB overflow-auto px-8 py-16 pb-16 lg:px-0 w-full lg:w-10/12 h-primary md:h-4/5 relative z-20 bg-glassLight lg:rounded-3xl max-w-[1184px] backdrop-blur-md flex justify-center items-center flex-wrap content-center animate-fade-in duration-300">
         <div className="w-full h-full lg:w-4/5 lg:h-4/5 //DISP flex items-center content-center">
           <Chart type="bar" data={chartData} />
         </div>

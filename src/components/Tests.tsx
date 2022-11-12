@@ -1,10 +1,8 @@
 import LoadingComponent from "./common/LoadingComponent";
 import TestCardItem from "./common/TestCardItem";
 import CategoryIcon from "./common/CategoryIcon";
-import Loading from "./common/Loading";
 import { GET_CATEGORY } from "../graphql/query";
 import { useQuery } from "@apollo/client";
-import { useEffect } from "react";
 
 interface Tests {
   id: string;
@@ -24,10 +22,6 @@ interface TestsProps {
 
 const Tests = ({ redirectPage, title }: TestsProps): JSX.Element => {
   const { data, loading, error } = useQuery(GET_CATEGORY);
-
-  useEffect(() => {
-    console.log({ data, loading, error });
-  }, [data, loading, error]);
 
   if (loading) return <LoadingComponent />;
   if (error) return <LoadingComponent hasError={error.message} />;
