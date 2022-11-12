@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface TestCardProps {
   test: {
@@ -8,8 +8,9 @@ interface TestCardProps {
     id: string;
     title: string;
     categorySlug: string;
+    answers: [];
+    questions: [];
   };
-
   index: number;
   redirectPage?: string;
 }
@@ -31,8 +32,15 @@ const TestCardItem = ({ test, index, redirectPage }: TestCardProps): JSX.Element
       </div>
 
       <div className="flex gap-4 items-center">
-        <span className="text-white text-base">6000</span>
-        <span className="text-white text-2xl">6000</span>
+        <div className="flex items-center gap-2 bg-glassLight px-2 rounded-md">
+          <span className="text-white text-2xl">{test.questions.length}</span>
+          <span>Questions</span>
+        </div>
+
+        <div className="flex items-center gap-2 bg-glassLight px-2 rounded-md">
+          <span className="text-white text-2xl">{test.answers.length}</span>
+          <span>Answers</span>
+        </div>
       </div>
     </div>
   );

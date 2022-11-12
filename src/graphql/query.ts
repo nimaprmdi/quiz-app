@@ -25,6 +25,16 @@ const GET_CATEGORY = gql`
       categoryIcon {
         url
       }
+      answers {
+        ... on Answer {
+          id
+        }
+      }
+      questions {
+        ... on Question {
+          id
+        }
+      }
     }
   }
 `;

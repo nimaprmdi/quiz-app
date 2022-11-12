@@ -19,7 +19,7 @@ const CategoryIcon = ({ title = "" }: CategoryIconProps) => {
 
   useEffect(() => {
     if (data) {
-      !title && setIconText(data.globals[0].globalIconText);
+      !title && data.globals.length > 0 ? setIconText(data.globals[0].globalIconText) : setIconText("");
     }
   }, [loading, error, data]);
 

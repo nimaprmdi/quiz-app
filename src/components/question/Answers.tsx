@@ -64,7 +64,7 @@ const Answers = ({ answerData, questionSlug, displayPopup, name }: AnswersProps)
         <div className="c-test__cards w-full gap-2 flex justify-between items-center content-center flex-wrap mt-9 max-h-auto 4xl:max-h-72 overflow-auto px-4 ">
           <ul className="w-full flex justify-center gap-14 gap-y-3 flex-wrap">
             {answerData.map((answer, index) => (
-              <li key={answer.id}>
+              <li key={answer.id} className="w-full md:w-auto">
                 <AnswerItem
                   id={answer.id}
                   index={++index}

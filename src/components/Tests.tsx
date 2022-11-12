@@ -4,6 +4,7 @@ import CategoryIcon from "./common/CategoryIcon";
 import Loading from "./common/Loading";
 import { GET_CATEGORY } from "../graphql/query";
 import { useQuery } from "@apollo/client";
+import { useEffect } from "react";
 
 interface Tests {
   id: string;
@@ -12,6 +13,8 @@ interface Tests {
   categoryIcon: {
     url: string;
   };
+  answers: [];
+  questions: [];
 }
 
 interface TestsProps {
@@ -22,6 +25,10 @@ interface TestsProps {
 const Tests = ({ redirectPage, title }: TestsProps): JSX.Element => {
   const { data, loading, error } = useQuery(GET_CATEGORY);
 
+  useEffect(() => {
+    console.log({ data, loading, error });
+  }, [data, loading, error]);
+
   if (loading) return <LoadingComponent />;
   if (error) return <LoadingComponent hasError={error.message} />;
 
@@ -31,13 +38,11 @@ const Tests = ({ redirectPage, title }: TestsProps): JSX.Element => {
         <h2 className="c-test__title text-2xl text-white w-full">{title}</h2>
 
         <div className="c-test__cards w-full gap-2 flex justify-center items-center content-center flex-wrap mt-9">
-          {data.categories.length > 0 ? (
-            data.categories.map((test: Tests, index: number) => (
-              <TestCardItem key={test.id} redirectPage={redirectPage} index={++index} test={test} />
-            ))
-          ) : (
-            <Loading />
-          )}
+          {data.categories.length > 0
+            ? data.categories.map((test: Tests, index: number) => (
+                <TestCardItem key={test.id} redirectPage={redirectPage} index={++index} test={test} />
+              ))
+            : "No Data Found !"}
         </div>
       </div>
 
