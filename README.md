@@ -1,6 +1,6 @@
 # Quiz-App - [Demo](https://nimaprmdi.github.io/quiz-app/)
 
-Quiz-App is a quiz app using Hygraph headless CMS and GraphQL + TypeScript
+Quiz-App is a quiz app using Hygraph headless CMS and GraphQL + TypeScript & React
 
 ![HomePage](/images/screen_1.png)
 ![StatisticsPage](/images/screen_2.png)
@@ -48,7 +48,6 @@ See a working example at [nimaprmdi.github.io/Quiz-App/](https://nimaprmdi.githu
 ## Theme development
 
 - Run `npm install` from the theme directory to install dependencies
-- Change local variables in the `/src/services/SpotifyServices.tsx` using the provided values from the spotify dashboard [https://developer.spotify.com/dashboard/](https://developer.spotify.com/dashboard/)
 - Run `npm start` and have fun
 
 ## License
