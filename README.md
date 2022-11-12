@@ -1,6 +1,6 @@
 # Quiz-App - [Demo](https://nimaprmdi.github.io/quiz-app/)
 
-Quiz-App is a a minimal & mobile-first theme. The best choice for people who want to publish their projects.
+Quiz-App is a quiz app using Hygraph headless CMS and GraphQL + TypeScript
 
 ![HomePage](/images/screen_1.png)
 ![StatisticsPage](/images/screen_2.png)
@@ -61,17 +61,9 @@ Icons by Iconify (React)
 License: MIT, https://raw.githubusercontent.com/phosphor-icons/phosphor-home/master/LICENSE
 Source: https://iconify.design/
 
-Map Provided in contact Page by mapbox-gl & DefinitelyTyped
-License: MIT, https://raw.githubusercontent.com/phosphor-icons/phosphor-home/master/LICENSE
-Source: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 classes and components by tailwindcss
 License: MIT, https://raw.githubusercontent.com/phosphor-icons/phosphor-home/master/LICENSE
 Source: https://github.com/tailwindlabs/tailwindcss
-
-Audio & Video Players by Plyr React
-License: MIT, https://raw.githubusercontent.com/phosphor-icons/phosphor-home/master/LICENSE
-Source: https://github.com/chintan9/plyr-react
 
 TypeScript by Microsoft
 License: GNU GPLv2, https://opensource.org/licenses/GPL-2.0
@@ -81,13 +73,9 @@ Toast Notification by react-toastify
 License: MIT, https://raw.githubusercontent.com/phosphor-icons/phosphor-home/master/LICENSE
 Source: https://fkhadra.github.io/react-toastify/introduction/
 
-Flickity by desandro
-License: GNU GPLv3, https://flickity.metafizzy.co/license.html
-Source: https://flickity.metafizzy.co/
-
-react-flickity-component by yaodingyd
-License: GNU GPLv3, https://flickity.metafizzy.co/license.html
-Source: https://github.com/yaodingyd/react-flickity-component
+Swiper.js React by nolimits4web
+License: GNU GPLv3, https://github.com/nolimits4web/swiper/blob/master/LICENSE
+Source: https://github.com/nolimits4web/swiper
 
 ## Developer Notes
 
