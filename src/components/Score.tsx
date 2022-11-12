@@ -4,6 +4,7 @@ import { useMutation } from "@apollo/client";
 import { SEND_T } from "../graphql/mutation";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import CategoryIcon from "./common/CategoryIcon";
 
 const Score = () => {
   const {
@@ -56,8 +57,6 @@ const Score = () => {
 
       navigate("/");
     }
-
-    console.log({ data, error, loading });
   }, [loading, error, data]);
 
   return (
@@ -107,26 +106,22 @@ const Score = () => {
           </div>
         </div>
 
-        <div className="w-full mt-24">
+        <div className="w-full mt-24 flex gap-4 justify-center flex-wrap">
+          <button onClick={() => handleTestAgain()} className="c-btn c-btn--ghost capitalize">
+            test again
+          </button>
+
           <button onClick={() => sendTime()} className="c-btn capitalize">
             save result
           </button>
 
-          <button onClick={() => handleTestAgain()} className="c-btn c-btn--ghost ml-4 capitalize">
-            test again
-          </button>
-
-          <button onClick={() => navigate("/")} className="c-btn c-btn--ghost ml-4 capitalize">
+          <button onClick={() => navigate("/")} className="c-btn c-btn--ghost capitalize">
             back to home
           </button>
         </div>
       </div>
 
-      <div className="overflow-hidden h-full w-full absolute z-10 bottom-0 right-0">
-        <span className="absolute bottom-[-50px] lg:bottom-[-120px] right-[10px] lg:right-[7%] text-57.5 lg:text-112.5 z-10 font-bold text-white">
-          JS
-        </span>
-      </div>
+      <CategoryIcon />
     </div>
   );
 };

@@ -14,8 +14,12 @@ const Header = (): JSX.Element => {
     >
       <div className="w-[1184px] h-full flex justify-between items-center">
         <div className="c-header__links">
-          <Link to="/welcome/asd" type="a" className="text-white hover:text-gray-300">
-            Exams
+          <Link to="/" type="a" className="text-white hover:text-gray-300 text-xl">
+            Tests
+          </Link>
+
+          <Link to="/stats" className="text-white hover:text-gray-300 text-xl ml-4">
+            Statistics
           </Link>
         </div>
 
@@ -24,9 +28,13 @@ const Header = (): JSX.Element => {
         </div>
 
         <div className="c-header__about flex justify-between gap-6">
-          <Icon icon="akar-icons:github-fill" width={20} />
+          <a href="https://github.com/nimaprmdi/quiz-app" target="_blank">
+            <Icon icon="akar-icons:github-fill" width={25} fill="#fff" color="#fff" />
+          </a>
 
-          <Icon icon="akar-icons:codepen-fill" width={20} />
+          <a href="http://nimapourmohammadi.com/" target="_blank">
+            <Icon icon="ant-design:global-outlined" width={28} fill="#fff" color="#fff" />
+          </a>
         </div>
       </div>
     </header>

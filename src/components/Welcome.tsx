@@ -16,8 +16,6 @@ const Welcome = () => {
   if (loading) return <LoadingComponent />;
   if (error) return <LoadingComponent hasError={error.message} />;
 
-  console.log(data);
-
   const { categorySlug } = data.category;
 
   const globalText = (data.category.global.length > 0 && data.category.global[0].globalTitle) || "Welcome to test";

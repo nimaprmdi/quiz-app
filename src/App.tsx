@@ -19,11 +19,12 @@ function App() {
         <SwiperProvider>
           <Header />
           <Routes>
-            <Route path="/" element={<Tests />} />
+            <Route path="/" element={<Tests redirectPage="welcome" title="Take a test" />} />
             <Route path="/welcome/:slug" element={<Welcome />} />
             <Route path="/question/:slug" element={<Question />} />
             <Route path="/score/:slug" element={<Score />} />
-            <Route path="/statistics" element={<Stats />} />
+            <Route path="/stats/:slug" element={<Stats />} />
+            <Route path="/stats" element={<Tests redirectPage="stats" title="Select a category" />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<Navigate replace to="/404" />} />
           </Routes>

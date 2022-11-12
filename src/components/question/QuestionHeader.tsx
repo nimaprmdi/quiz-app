@@ -25,7 +25,7 @@ const QuestionHeader = () => {
             <span className="digits mili-sec">{("0" + ((questionState.globalTime / 10) % 100)).slice(-2)}</span>
           </div>
 
-          <Icon icon="fluent-mdl2:world-clock" width={20} />
+          <Icon icon="bytesize:clock" width={20} />
         </div>
       </div>
     </div>

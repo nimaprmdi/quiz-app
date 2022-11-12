@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { toast } from "react-toastify";
 import "swiper/swiper-bundle.css";
+import CategoryIcon from "./common/CategoryIcon";
 
 interface QuestionsSingle {
   id: string;
@@ -21,22 +22,20 @@ interface QuestionsSingle {
 const Question = () => {
   const { slug } = useParams();
   const { data, loading, error } = useQuery(GET_QUESTIONS, {
-    fetchPolicy: "network-only",
-    variables: {
-      slug,
-    },
+    variables: { slug },
   });
-  const [displayPopup, setDisplayPopup] = useState(true);
   const [name, setname] = useState("");
+  const [displayPopup, setDisplayPopup] = useState(true);
   const { dispatch } = useContext(QuestionContext);
 
-  const handlePopup = (name: string) => {
+  const handlePopup = (inputName: string) => {
     dispatch({ type: "RESET_TEST" });
 
-    if (name) {
+    if (inputName) {
+      const userName = inputName.toLowerCase();
       setDisplayPopup(false);
-      setname(name);
-      dispatch({ type: "ADD_NAME", payload: { name } });
+      setname(userName);
+      dispatch({ type: "ADD_NAME", payload: { name: userName } });
     } else {
       toast.error("Enter Your Name", {
         position: "top-center",
@@ -52,7 +51,7 @@ const Question = () => {
       {displayPopup && (
         <PopUp
           title="Welcome To This Test"
-          description="Your test will start when ypu click on the Next button and your time will get calculated!"
+          description="Your test will start when you click on the next button and your time will get calculated !"
           handlePopClick={(e) => handlePopup(e)}
         />
       )}
@@ -77,11 +76,7 @@ const Question = () => {
         </div>
       </div>
 
-      <div className="overflow-hidden h-full w-full absolute z-10 bottom-0 right-0">
-        <span className="absolute bottom-[-50px] lg:bottom-[-120px] right-[10px] lg:right-[7%] text-57.5 lg:text-112.5 z-10 font-bold text-white">
-          JS
-        </span>
-      </div>
+      <CategoryIcon />
     </section>
   );
 };

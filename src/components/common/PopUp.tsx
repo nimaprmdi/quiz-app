@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Icon } from "@iconify/react";
 
 interface PopUpProps {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   handlePopClick: (name: string) => void;
 }
 
