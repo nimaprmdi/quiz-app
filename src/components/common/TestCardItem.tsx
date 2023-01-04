@@ -26,7 +26,7 @@ const TestCardItem = ({ test, index, redirectPage }: TestCardProps): JSX.Element
             <div className="flex gap-3 items-center">
                 <div className="text-gray-400 font-bold">{index}</div>
 
-                <img src={test.categoryIcon.url} alt={test.title} style={{ width: "30px" }} />
+                {test.categoryIcon && <img src={test.categoryIcon.url} alt={test.title} style={{ width: "30px" }} />}
 
                 <h5 className="text-white">{test.title}</h5>
             </div>
