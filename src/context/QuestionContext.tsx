@@ -4,57 +4,57 @@ import { StateType, ActionType, QustionContextProps } from "../models/QuestionCo
 /* This Context Will Find Out Which Answer Is Selcted  */
 
 const initialState: StateType = {
-  selectedAnswer: [],
-  name: "",
-  globalTime: 0,
+    selectedAnswer: [],
+    name: "",
+    globalTime: 0,
 };
 
 const questionReducer = (state: StateType, action: ActionType) => {
-  switch (action.type) {
-    case "ADD_ANSWER":
-      if (!state.selectedAnswer.find((item) => item.question === action.payload.question)) {
-        return {
-          ...state,
-          selectedAnswer: [...state.selectedAnswer, action.payload],
-        };
-      }
-      return state;
+    switch (action.type) {
+        case "ADD_ANSWER":
+            if (!state.selectedAnswer.find((item) => item.question === action.payload.question)) {
+                return {
+                    ...state,
+                    selectedAnswer: [...state.selectedAnswer, action.payload],
+                };
+            }
+            return state;
 
-    case "ADD_NAME":
-      return {
-        ...state,
-        name: action.payload.name,
-      };
+        case "ADD_NAME":
+            return {
+                ...state,
+                name: action.payload.name,
+            };
 
-    case "ADD_TIME":
-      return {
-        ...state,
-        globalTime: action.payload.globalTime,
-      };
+        case "ADD_TIME":
+            return {
+                ...state,
+                globalTime: action.payload.globalTime,
+            };
 
-    case "RESET_TEST":
-      return {
-        selectedAnswer: [],
-        name: "",
-        globalTime: 0,
-      };
-    default:
-      return state;
-  }
+        case "RESET_TEST":
+            return {
+                selectedAnswer: [],
+                name: "",
+                globalTime: 0,
+            };
+        default:
+            return state;
+    }
 };
 
 export const QuestionContext = createContext<{
-  state: StateType;
-  dispatch: React.Dispatch<any>;
+    state: StateType;
+    dispatch: React.Dispatch<any>;
 }>({
-  state: initialState,
-  dispatch: () => null,
+    state: initialState,
+    dispatch: () => null,
 });
 
 const QuestionProvider = ({ children }: QustionContextProps) => {
-  const [state, dispatch] = useReducer(questionReducer, initialState);
+    const [state, dispatch] = useReducer(questionReducer, initialState);
 
-  return <QuestionContext.Provider value={{ state, dispatch }}>{children}</QuestionContext.Provider>;
+    return <QuestionContext.Provider value={{ state, dispatch }}>{children}</QuestionContext.Provider>;
 };
 
 export default QuestionProvider;

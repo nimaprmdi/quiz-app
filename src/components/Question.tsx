@@ -11,74 +11,86 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { toast } from "react-toastify";
 import "swiper/swiper-bundle.css";
+import useTimer from "../hooks/useTimer";
 
 interface QuestionsSingle {
-  id: string;
-  questionSlug: string;
-  questionTitle: string;
-  answers: [];
+    id: string;
+    questionSlug: string;
+    questionTitle: string;
+    answers: [];
 }
 
 const Question = () => {
-  const { slug } = useParams();
-  const { data, loading, error } = useQuery(GET_QUESTIONS, {
-    variables: { slug },
-  });
-  const [name, setname] = useState("");
-  const [displayPopup, setDisplayPopup] = useState(true);
-  const { dispatch } = useContext(QuestionContext);
+    const { slug } = useParams();
+    const { data, loading, error } = useQuery(GET_QUESTIONS, {
+        variables: { slug },
+    });
+    const [name, setname] = useState("");
+    const [displayPopup, setDisplayPopup] = useState(true);
+    const { dispatch } = useContext(QuestionContext);
 
-  const handlePopup = (inputName: string) => {
-    dispatch({ type: "RESET_TEST" });
+    //////////
 
-    if (inputName) {
-      const userName = inputName.toLowerCase();
-      setDisplayPopup(false);
-      setname(userName);
-      dispatch({ type: "ADD_NAME", payload: { name: userName } });
-    } else {
-      toast.error("Enter Your Name", {
-        position: "top-center",
-      });
-    }
-  };
+    const timer = useTimer();
 
-  if (loading) return <LoadingComponent />;
-  if (error) return <LoadingComponent hasError={error.message} />;
+    //////////
 
-  return (
-    <section className="c-question w-full min-h-screen bg-primary flex justify-center items-start">
-      {displayPopup && (
-        <PopUp
-          title="Welcome To This Test"
-          description="Your test will start when you click on the next button and your time will get calculated !"
-          handlePopClick={(e) => handlePopup(e)}
-        />
-      )}
+    const handlePopup = (inputName: string) => {
+        dispatch({ type: "RESET_TEST" });
 
-      <div className="w-full max-w-[1184px] mt-9 flex justify-center flex-wrap">
-        <QuestionHeader />
+        if (inputName) {
+            const userName = inputName.toLowerCase();
+            setDisplayPopup(false);
+            setname(userName);
+            dispatch({ type: "ADD_NAME", payload: { name: userName } });
 
-        <div className="w-full relative z-40">
-          <Swiper init allowTouchMove={false}>
-            {data.questions.map((question: QuestionsSingle, index: number) => (
-              <SwiperSlide key={index}>
-                <QuestionBody
-                  questionTitle={question.questionTitle}
-                  answers={question.answers}
-                  questionSlug={question.questionSlug}
-                  displayPopup={displayPopup}
-                  name={name}
+            timer.handleStart();
+        } else {
+            toast.error("Enter Your Name", {
+                position: "top-center",
+            });
+        }
+    };
+
+    if (loading) return <LoadingComponent />;
+    if (error) return <LoadingComponent hasError={error.message} />;
+
+    return (
+        <section className="c-question w-full min-h-screen bg-primary flex justify-center items-start">
+            {displayPopup && (
+                <PopUp
+                    title="Welcome To This Test"
+                    description="Your test will start when you click on the next button and your time will get calculated !"
+                    handlePopClick={(e) => handlePopup(e)}
                 />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </div>
+            )}
 
-      <CategoryIcon />
-    </section>
-  );
+            <div className="w-full max-w-[1184px] mt-9 flex justify-center flex-wrap">
+                <QuestionHeader time={timer.time} />
+
+                <div className="w-full relative z-40">
+                    <Swiper init allowTouchMove={false}>
+                        {data.questions.map((question: QuestionsSingle, index: number) => (
+                            <SwiperSlide key={index}>
+                                <QuestionBody
+                                    handlePause={timer.handlePause}
+                                    handleStart={timer.handleStart}
+                                    time={timer.time}
+                                    questionTitle={question.questionTitle}
+                                    answers={question.answers}
+                                    questionSlug={question.questionSlug}
+                                    displayPopup={displayPopup}
+                                    name={name}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </div>
+            </div>
+
+            <CategoryIcon />
+        </section>
+    );
 };
 
 export default Question;

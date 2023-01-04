@@ -13,26 +13,26 @@ import "react-toastify/dist/ReactToastify.css";
 import "./assets/css/App.scss";
 
 function App() {
-  return (
-    <main className="App bg-primary">
-      <QuestionProvider>
-        <SwiperProvider>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Tests redirectPage="welcome" title="Take a test" />} />
-            <Route path="/welcome/:slug" element={<Welcome />} />
-            <Route path="/question/:slug" element={<Question />} />
-            <Route path="/score/:slug" element={<Score />} />
-            <Route path="/stats/:slug" element={<Stats />} />
-            <Route path="/stats" element={<Tests redirectPage="stats" title="Select a category" />} />
-            <Route path="/404" element={<NotFound />} />
-            <Route path="*" element={<Navigate replace to="/404" />} />
-          </Routes>
-          <ToastContainer />
-        </SwiperProvider>
-      </QuestionProvider>
-    </main>
-  );
+    return (
+        <main className="App bg-primary">
+            <QuestionProvider>
+                <SwiperProvider>
+                    <Header />
+                    <Routes>
+                        <Route path="/" element={<Tests redirectPage="welcome" title="Take a test" />} />
+                        <Route path="/welcome/:slug" element={<Welcome />} />
+                        <Route path="/question/:slug" element={<Question />} />
+                        <Route path="/score/:slug" element={<Score />} />
+                        <Route path="/stats/:slug" element={<Stats />} />
+                        <Route path="/stats" element={<Tests redirectPage="stats" title="Select a category" />} />
+                        <Route path="/404" element={<NotFound />} />
+                        <Route path="*" element={<Navigate replace to="/404" />} />
+                    </Routes>
+                    <ToastContainer />
+                </SwiperProvider>
+            </QuestionProvider>
+        </main>
+    );
 }
 
 export default App;
